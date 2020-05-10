@@ -15,8 +15,8 @@
 function [Phis,S_ss,progmat,...
     U_is,U_2s,U_3s,u_ss,T_3s,S_3s,rho_3s,rho_ss,T_fss,...
     Q_2_los,Q_2_his,F_2_los,F_2_his,u_1_los,u_1_his,u_i_los,u_i_his,...
-    S_s0,Dphis,Lfacs,...
-    S_2,T_a,S_a,rho_2,T_f2] = progressive_solve(Q,F,U_1,T_1,S_1,DS2,rh1,phi,static_parameters,geophysical_parameters)
+    S_s0,DPhis,Lfacs,...
+    S_2,T_a,S_a,rho_2,T_f2,mat1_cd] = progressive_solve(Q,F,U_1,T_1,S_1,DS2,rh1,phi,static_parameters,geophysical_parameters)
 
 %% Extract variables from arguments
 rho_i      = static_parameters.rhi ;
@@ -26,7 +26,7 @@ c_p        = static_parameters.c_p ;
 c_i        = static_parameters.c_i ;
 gamma      = static_parameters.gam ;
 L          = static_parameters.L ;
-Dphi_limit = static_parameters.Dphi_limit ;
+DPhi_limit = static_parameters.DPhi_limit ;
 pressure   = geophysical_parameters.pressure ;
 
 % Compute PW and ambient water properties, plus AW density. These variables
@@ -71,19 +71,21 @@ u_1_los  = Q_2_los ;
 u_1_his  = Q_2_los ;
 u_i_los  = Q_2_los ;
 u_i_his  = Q_2_los ;
-Dphis    = Q_2_los ;
+DPhis    = Q_2_los ;
 U_is     = Q_2_los ;
 U_2s     = Q_2_los ;
 U_3s     = Q_2_los ;
 u_ss     = Q_2_los ;
+% Condition number diagnostics for debug:
+mat1_cd  = Q_2_los ;
 
 % Precompute as much as possible
 [S_ss, Phis] = ndgrid(S_ss_vec,Phis_vec) ;
 T_fss        = gsw_CT_freezing(S_ss,pressure) ;         % Freezing temperature of Shelf Water, oC.
-rho_ss       = gsw_rho(S_ss, T_fss,pressure) ;          % Density of Shelf Water, kg/m^3
-T_3s         = T_fss - (T_fss - T_a).*Phis ;            % Temperature of Overflow Water, degC
-S_3s         = S_ss  - (S_ss  - S_a).*Phis ;            % Salinity of Overflow Water, g/kg
-rho_3s       = gsw_rho(S_3s, T_3s, pressure) ;          % Density of Overflow Water, kg/m^3
+rho_ss       = gsw_rho(S_ss, T_fss,pressure) ;          % Density              of Shelf Water, kg/m^3
+T_3s         = T_fss - (T_fss - T_a).*Phis ;            % Temperature          of Overflow Water, degC
+S_3s         = S_ss  - (S_ss  - S_a).*Phis ;            % Salinity             of Overflow Water, g/kg
+rho_3s       = gsw_rho(S_3s, T_3s, pressure) ;          % Density              of Overflow Water, kg/m^3
 Lfacs        = L - c_p.*T_fss + c_i.*(T_fss - T_i) ;
 
 % Loop over S_s and Phi
@@ -139,8 +141,8 @@ for ss = 1:N_S_ss
                 u_s = U_3*(1 - Phi) ;
                 
                 % Check entrainment Phi. Compute difference and compare to threshold:
-                Dphi = Phi - (1 - (gamma*(abs(u_s)^(1/3))*(rho_s - rho_a)^(-2/3))) ;
-                if(abs(Dphi) <= Dphi_limit && Phi < 1)          % Avoid Phi = 1.
+                DPhi = Phi - (1 - (gamma*(abs(u_s)^(1/3))*(rho_s - rho_a)^(-2/3))) ;
+                if(abs(DPhi) <= DPhi_limit && Phi < 1)          % Avoid Phi = 1.
                     progmat(ss,pp,4) = 1 ;
                     % Solve overdetermined problem for (u_1, u_i) using this u_s
                     % and the inequality constraints.
@@ -156,7 +158,7 @@ for ss = 1:N_S_ss
                     const1 = -(range_vec3'*rhs3)/range_vec3(1) ;
                     slope1 = - range_vec3(3)    /range_vec3(1) ;
                     F_2_lo = const1 ;                          % Value of F_2 for minimum Q_2, which is zero.
-                    F_2_hi = const1 + slope1*Q ;       % Value of F_2 for maximum Q_2, which is Q.
+                    F_2_hi = const1 + slope1*Q ;               % Value of F_2 for maximum Q_2, which is Q.
                     
                     % Test these F_2 limits for consistency with the F_2 inequalities
                     if(~(F_2_lo > 0 && F_2_hi > 0) || (F_2_lo < F && F_2_hi < F))    % Consistent
@@ -234,8 +236,9 @@ for ss = 1:N_S_ss
                             U_2s(   ss,pp) = U_2 ;
                             U_3s(   ss,pp) = U_3 ;
                             u_ss(   ss,pp) = u_s ;
-                            Dphis(  ss,pp) = Dphi ;
-                            
+                            DPhis(  ss,pp) = DPhi ;
+                            mat1_cd(ss,pp) = cond(matrix1) ;
+                                                        
                         end % if
                     end % if
                 end % if
