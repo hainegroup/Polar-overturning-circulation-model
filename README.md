@@ -4,7 +4,7 @@ Polar Overturning Circulation model
 [![codecov](https://codecov.io/gh/ThomasHaine/polar_overturning_circulation_model/branch/master/graph/badge.svg)](https://codecov.io/gh/ThomasHaine/polar_overturning_circulation_model)
 [![License:MIT](https://img.shields.io/badge/License-MIT-lightgray.svg?style=flt-square)](https://opensource.org/licenses/MIT)
 
-Polar Overturning Circulation model Matlab code for publication.
+Polar Overturning Circulation model Matlab code for publication. Under development...
 
 --------
 
