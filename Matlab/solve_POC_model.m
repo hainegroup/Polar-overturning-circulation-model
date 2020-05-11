@@ -16,9 +16,17 @@ function [Phis,S_ss,progmat,...
     U_is,U_2s,U_3s,u_ss,T_3s,S_3s,rho_3s,rho_ss,T_fss,...
     Q_2_los,Q_2_his,F_2_los,F_2_his,u_1_los,u_1_his,u_i_los,u_i_his,...
     S_s0,DPhis,Lfacs,...
-    S_2,T_a,S_a,rho_2,T_f2,mat1_cd] = progressive_solve(Q,F,U_1,T_1,S_1,DS2,rh1,phi,static_parameters,geophysical_parameters)
+    S_2,T_a,S_a,rho_2,T_f2,mat1_cd] = solve_POC_model(dynamic_parameters,static_parameters,geophysical_parameters)
 
 %% Extract variables from arguments
+Q          = dynamic_parameters.Q ;
+F          = dynamic_parameters.F ;
+U_1        = dynamic_parameters.U_1 ;
+T_1        = dynamic_parameters.T_1 ;
+S_1        = dynamic_parameters.S_1 ;
+rh1        = dynamic_parameters.rh1 ;
+DS2        = dynamic_parameters.DS2 ;
+phi        = dynamic_parameters.phi ;
 rho_i      = static_parameters.rhi ;
 T_i        = static_parameters.T_i ;
 S_i        = static_parameters.S_i ;
