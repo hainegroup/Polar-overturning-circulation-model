@@ -51,13 +51,13 @@ end % if
 
 % Plot water masses
 p_AW  = scatter(this_case.base_case.S_1,this_case.base_case.T_1 ,80,'o','filled','Markerfacecolor',this_case.plot_options.AW_col) ;
-p_PW  = scatter(this_case.sens.S_2,this_case.sens.Tf2,80,'o','filled','Markerfacecolor',this_case.plot_options.PW_col) ;
+p_PW  = scatter(this_case.dynamic_parameters.S_2,this_case.dynamic_parameters.Tf2,80,'o','filled','Markerfacecolor',this_case.plot_options.PW_col) ;
 if(isfield(this_case,'vals'))
     scatter(cell2mat(this_case.vals.S_3),cell2mat(this_case.vals.T_3),20,'o','filled','Markerfacecolor',this_case.plot_options.OW_col) ;
     scatter(cell2mat(this_case.vals.S_s),cell2mat(this_case.vals.T_f),20,'o','filled','Markerfacecolor',this_case.plot_options.SW_col) ;
 end % if
 p_SW  = scatter(this_case.sens.S_scan,this_case.sens.Tfs,80,'o','filled','Markerfacecolor',this_case.plot_options.SW_col,'MarkerEdgecolor','w') ;
-p_aW  = scatter(this_case.sens.S_a,this_case.sens.T_a,80,'x','Markerfacecolor',this_case.plot_options.aW_col,'MarkerEdgecolor',this_case.plot_options.aW_col) ;
+p_aW  = scatter(this_case.dynamic_parameters.S_a,this_case.dynamic_parameters.T_a,80,'x','Markerfacecolor',this_case.plot_options.aW_col,'MarkerEdgecolor',this_case.plot_options.aW_col) ;
 p_OW  = scatter(this_case.sens.S_3can,this_case.sens.T_3can ,80,'o','filled','Markerfacecolor',this_case.plot_options.OW_col,'MarkerEdgecolor','w') ;
 
 xlabel('Salinity [g/kg]')
