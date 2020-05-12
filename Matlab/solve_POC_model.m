@@ -10,23 +10,26 @@
 %   5               F_2/Q_2 inequalities
 %   6               u_1/u_i inequalities
 %   7               OW/AW density stability
-% twnh Sep, Nov '19, Jan, Mar '20
+% twnh Sep, Nov '19, Jan, Mar, May '20
 
 function [Phis,S_ss,progmat,...
     U_is,U_2s,U_3s,u_ss,T_3s,S_3s,rho_3s,rho_ss,T_fss,...
     Q_2_los,Q_2_his,F_2_los,F_2_his,u_1_los,u_1_his,u_i_los,u_i_his,...
-    S_s0,DPhis,Lfacs,...
-    S_2,T_a,S_a,rho_2,T_f2,mat1_cd] = solve_POC_model(dynamic_parameters,this_index,static_parameters,geophysical_parameters)
+    S_s0,DPhis,Lfacs,mat1_cd] = solve_POC_model(dynamic_parameters,this_index,static_parameters,geophysical_parameters)
 
 %% Extract variables from arguments
-Q          = dynamic_parameters.Q(this_index)  
+Q          = dynamic_parameters.Q(this_index) ;
 F          = dynamic_parameters.F(this_index) ;
 U_1        = dynamic_parameters.U_1(this_index) ;
 T_1        = dynamic_parameters.T_1(this_index) ;
 S_1        = dynamic_parameters.S_1(this_index) ;
 rh1        = dynamic_parameters.rh1(this_index) ;
-DS2        = dynamic_parameters.DS2(this_index) ;
-phi        = dynamic_parameters.phi(this_index) ;
+Tf2        = dynamic_parameters.Tf2(this_index) ;
+S_2        = dynamic_parameters.S_2(this_index) ;
+rh2        = dynamic_parameters.rh2(this_index) ;
+T_a        = dynamic_parameters.T_a(this_index) ;
+S_a        = dynamic_parameters.S_a(this_index) ;
+rha        = dynamic_parameters.rha(this_index) ;
 rho_i      = static_parameters.rhi ;
 T_i        = static_parameters.T_i ;
 S_i        = static_parameters.S_i ;
@@ -37,19 +40,21 @@ L          = static_parameters.L ;
 DPhi_limit = static_parameters.DPhi_limit ;
 pressure   = geophysical_parameters.pressure ;
 
-% Compute PW and ambient water properties, plus AW density. These variables
-% are also passed out.
-S_2   = compute_max_PW_salinity(T_1, S_1, pressure, L, c_p, c_i, T_i, S_i) + DS2 ;
-T_f2  = gsw_CT_freezing(S_2,pressure) ;  % Freezing temperature of Polar    Water, degC
-rho_2 = gsw_rho(S_2, T_f2, pressure) ;   % Density              of Polar    Water, kg/m^3
-T_a   = phi*T_f2 + (1 - phi)*T_1 ;       % Temperature          of ambient  Water, degC
-S_a   = phi*S_2  + (1 - phi)*S_1 ;       % Salinity             of ambient  Water, g/kg
-rho_a = gsw_rho(S_a, T_a, pressure) ;    % Density              of ambient  Water, kg/m^3
+%% Test!
+%DS2 = dynamic_parameters.DS2(this_index) ;
+%S_2   = compute_max_PW_salinity(T_1, S_1, pressure, L, c_p, c_i, T_i, S_i) + DS2 
+%T_f2  = gsw_CT_freezing(S_2,pressure)   % Freezing temperature of Polar    Water, degC
+%rho_2 = gsw_rho(S_2, T_f2, pressure) ;   % Density              of Polar    Water, kg/m^3
+%T_a   = phi*T_f2 + (1 - phi)*T_1 ;       % Temperature          of ambient  Water, degC
+%S_a   = phi*S_2  + (1 - phi)*S_1 ;       % Salinity             of ambient  Water, g/kg
+%rho_a = gsw_rho(S_a, T_a, pressure) ;    % Density              of ambient  Water, kg/m^3
+%% end test!
+
 
 %% Compute progressively
 Phis_vec = linspace(0,1,static_parameters.N_Phis_vec)' ;
 N_Phis   = static_parameters.N_Phis_vec ;
-S_s0     = gsw_SA_from_rho(rh1,T_f2,pressure) ;        % Not exactly the right freezing temperature, but ensures that S_s0 is a slight overestimate.
+S_s0     = gsw_SA_from_rho(rh1,Tf2,pressure) ;        % Not exactly the right freezing temperature, but ensures that S_s0 is a slight overestimate.
 S_ss_vec = linspace(S_s0,static_parameters.S_ssmax,static_parameters.N_S_ss_vec)' ;
 N_S_ss   = static_parameters.N_S_ss_vec ;
 
@@ -60,9 +65,9 @@ rhs1    = [
     Q - c_p*rh1*U_1*T_1 ] ;
 
 matrix1 = [
-    rho_2      NaN  rho_i     ; ...
-    rho_2*S_2  NaN  rho_i*S_i ; ...
-    c_p*rho_2*T_f2 NaN  NaN       ] ;
+    rh2      NaN  rho_i     ; ...
+    rh2*S_2  NaN  rho_i*S_i ; ...
+    c_p*rh2*Tf2 NaN  NaN       ] ;
 
 matrix3 = [
     rh1      rho_i     ; ...
@@ -94,7 +99,7 @@ rho_ss       = gsw_rho(S_ss, T_fss,pressure) ;          % Density              o
 T_3s         = T_fss - (T_fss - T_a).*Phis ;            % Temperature          of Overflow Water, degC
 S_3s         = S_ss  - (S_ss  - S_a).*Phis ;            % Salinity             of Overflow Water, g/kg
 rho_3s       = gsw_rho(S_3s, T_3s, pressure) ;          % Density              of Overflow Water, kg/m^3
-Lfacs        = L - c_p.*T_fss + c_i.*(T_fss - T_i) ;
+Lfacs        = L - c_p.*T_fss + c_i.*(T_fss - T_i) ;    % Effective latent heat at the Shelf Water conditions, J/kg
 
 % Loop over S_s and Phi
 for ss = 1:N_S_ss
@@ -149,7 +154,7 @@ for ss = 1:N_S_ss
                 u_s = U_3*(1 - Phi) ;
                 
                 % Check entrainment Phi. Compute difference and compare to threshold:
-                DPhi = Phi - (1 - (gamma*(abs(u_s)^(1/3))*(rho_s - rho_a)^(-2/3))) ;
+                DPhi = Phi - (1 - (gamma*(abs(u_s)^(1/3))*(rho_s - rha)^(-2/3))) ;
                 if(abs(DPhi) <= DPhi_limit && Phi < 1)          % Avoid Phi = 1.
                     progmat(ss,pp,4) = 1 ;
                     % Solve overdetermined problem for (u_1, u_i) using this u_s

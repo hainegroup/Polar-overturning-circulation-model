@@ -70,7 +70,7 @@ keyboard
                     end % if
                     
                 case 'PW'
-                    new_S = min(new_S,this_case.sens.S_2) ;
+                    new_S = min(new_S,this_case.dynamic_parameters.S_2) ;
                     new_T = gsw_CT_freezing(new_S,this_case.geophysical_parameters.pressure) ;
                     
                     phi = (objects.p_aW.XData - this_case.dynamic_parameters.S_1)/(objects.p_PW.XData - this_case.dynamic_parameters.S_1) ;
@@ -81,7 +81,7 @@ keyboard
                     
                 case 'aW'
                     new_T = min(new_T,this_case.dynamic_parameters.T_1) ;
-                    new_T = max(new_T,gsw_CT_freezing(this_case.sens.S_2,this_case.geophysical_parameters.pressure)) ;
+                    new_T = max(new_T,gsw_CT_freezing(this_case.dynamic_parameters.S_2,this_case.geophysical_parameters.pressure)) ;
                     new_S = min(new_S,gsw_SA_from_rho(this_case.dynamic_parameters.rh1,new_T,this_case.geophysical_parameters.pressure)) ;
                     new_T = max(new_T,gsw_CT_freezing(new_S,this_case.geophysical_parameters.pressure)) ;
                     
