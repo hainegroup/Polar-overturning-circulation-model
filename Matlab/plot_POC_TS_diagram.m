@@ -30,7 +30,7 @@ if(this_case.plot_options.diag_level > 0)
     p_theory2 = plot(this_case.theory.S3s,this_case.theory.numer0.U_2.vals,'color',this_case.theory.numer0.U_2.color) ;
     p_theoryi = plot(this_case.theory.S3s,this_case.theory.numer0.U_i.vals,'color',this_case.theory.numer0.U_i.color) ;
     if(this_case.plot_options.diag_level > 1)
-        plot(this_case.theory.numer0.U_2.S_star,this_case.theory.numer0.U_2.T_f,'color',this_case.theory.numer0.U_2.color,'Marker','diamond') ;
+        p_theory_S_star = plot(this_case.theory.numer0.U_2.S_star,this_case.theory.numer0.U_2.Tf2,'color',this_case.theory.numer0.U_2.color,'Marker','diamond') ;
     end
 end % if
 if(isfield(this_case.theory.patch_data,'S1'))
@@ -53,8 +53,8 @@ end % if
 p_AW  = scatter(this_case.base_case.S_1,this_case.base_case.T_1 ,80,'o','filled','Markerfacecolor',this_case.plot_options.AW_col) ;
 p_PW  = scatter(this_case.dynamic_parameters.S_2,this_case.dynamic_parameters.Tf2,80,'o','filled','Markerfacecolor',this_case.plot_options.PW_col) ;
 if(isfield(this_case,'vals'))
-    scatter(cell2mat(this_case.vals.S_3),cell2mat(this_case.vals.T_3),20,'o','filled','Markerfacecolor',this_case.plot_options.OW_col) ;
-    scatter(cell2mat(this_case.vals.S_s),cell2mat(this_case.vals.T_f),20,'o','filled','Markerfacecolor',this_case.plot_options.SW_col) ;
+    p_OW_vals = scatter(cell2mat(this_case.vals.S_3),cell2mat(this_case.vals.T_3),20,'o','filled','Markerfacecolor',this_case.plot_options.OW_col) ;
+    p_SW_vals = scatter(cell2mat(this_case.vals.S_s),cell2mat(this_case.vals.T_f),20,'o','filled','Markerfacecolor',this_case.plot_options.SW_col) ;
 end % if
 p_SW  = scatter(this_case.sens.S_scan,this_case.sens.Tfs,80,'o','filled','Markerfacecolor',this_case.plot_options.SW_col,'MarkerEdgecolor','w') ;
 p_aW  = scatter(this_case.dynamic_parameters.S_a,this_case.dynamic_parameters.T_a,80,'x','Markerfacecolor',this_case.plot_options.aW_col,'MarkerEdgecolor',this_case.plot_options.aW_col) ;
@@ -77,12 +77,14 @@ pos = get(gca,'Position') ;
 set(gca,'Position',[0.3 pos(2) 0.35 pos(4)]) ;
 
 % Output structure for interactive use
-objects = struct('p_AW',p_AW,'p_OW',p_OW,'p_PW',p_PW,'p_aW',p_aW,'p_SW',p_SW,'patch_data',this_case.theory.patch_data) ;
+objects = struct('p_AW',p_AW,'p_OW',p_OW,'p_PW',p_PW,'p_aW',p_aW,'p_SW',p_SW,'p_OW_vals',p_OW_vals,'p_SW_vals',p_SW_vals,'p_theory_S_star',p_theory_S_star) ;
 if(this_case.plot_options.diag_level > 0)
     objects.p_theory  = p_theory ;
     objects.p_theory2 = p_theory2 ;
     objects.p_theoryi = p_theoryi ;
+    objects.p1        = p1 ;
+    objects.p2        = p2 ;
+    objects.p3        = p3 ;
 end % if
 
 end
-
