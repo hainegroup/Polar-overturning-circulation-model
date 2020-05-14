@@ -73,18 +73,33 @@ end % if
 set(gca,'Box','on') ;
 title([this_case.base_case.exp_str,' ',this_case.base_case.tit_str],'Interpreter','latex','FontSize',14)
 
-pos = get(gca,'Position') ;
-set(gca,'Position',[0.3 pos(2) 0.35 pos(4)]) ;
+if(~this_case.plot_options.app_mode)
+    pos = get(gca,'Position') ;
+    set(gca,'Position',[0.3 pos(2) 0.35 pos(4)]) ;
+end % if
 
 % Output structure for interactive use
-objects = struct('p_AW',p_AW,'p_OW',p_OW,'p_PW',p_PW,'p_aW',p_aW,'p_SW',p_SW,'p_OW_vals',p_OW_vals,'p_SW_vals',p_SW_vals,'p_theory_S_star',p_theory_S_star) ;
+objects = struct('p_AW',p_AW,'p_OW',p_OW,'p_PW',p_PW,'p_aW',p_aW,'p_SW',p_SW) ;
+if(exist('p_OW_vals','var'))
+    objects.p_OW_vals = p_OW_vals ;
+    objects.p_SW_vals = p_SW_vals ;
+end % if
+if(exist('p_theory_S_star','var'))
+    objects.p_theory_S_star = p_theory_S_star ;
+end % if
 if(this_case.plot_options.diag_level > 0)
     objects.p_theory  = p_theory ;
     objects.p_theory2 = p_theory2 ;
     objects.p_theoryi = p_theoryi ;
-    objects.p1        = p1 ;
-    objects.p2        = p2 ;
-    objects.p3        = p3 ;
+    if(exist('p1','var')) 
+        objects.p1        = p1 ; 
+    end % if
+    if(exist('p2','var')) 
+        objects.p2        = p2 ; 
+    end % if
+    if(exist('p3','var')) 
+        objects.p3        = p3 ; 
+    end % if
 end % if
 
 end
