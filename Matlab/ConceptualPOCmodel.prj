@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="3056638161" file="/Users/thaine1/Desktop/manuscripts/Haine/Polar overturning model/ConceptualPOCmodel.prj" location="/Users/thaine1/Desktop/manuscripts/Haine/Polar overturning model" name="ConceptualPOCmodel" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="3929287875" file="/Users/thaine1/Desktop/manuscripts/Haine/Polar overturning model/ConceptualPOCmodel.prj" location="/Users/thaine1/Desktop/manuscripts/Haine/Polar overturning model" name="ConceptualPOCmodel" target="target.mlapps" target-name="Package App">
     <param.appname>ConceptualPOCmodel</param.appname>
     <param.authnamewatermark>Thomas Haine</param.authnamewatermark>
     <param.email>Thomas.Haine@jhu.edu</param.email>
@@ -11,7 +11,7 @@
 
 May 2020</param.description>
     <param.screenshot>/private/var/folders/c8/5kjcb0cn395d83w8dfvszmw1qpykvh/T/tp84639a1f_ba27_4dd3_8449_f06a59a0a931.png</param.screenshot>
-    <param.version>0.1</param.version>
+    <param.version>0.11</param.version>
     <param.products.name />
     <param.products.id />
     <param.products.version />
