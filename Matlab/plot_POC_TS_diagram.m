@@ -71,11 +71,14 @@ else
         'AW','PW','OW','SW','aW','location','eastoutside','interpreter','latex')
 end % if
 set(gca,'Box','on') ;
-title([this_case.base_case.exp_str,' ',this_case.base_case.tit_str],'Interpreter','latex','FontSize',14)
+title([this_case.base_case.exp_str,' ',this_case.base_case.tit_str],'Interpreter','latex','FontSize',14) ;
+
 
 if(~this_case.plot_options.app_mode)
     pos = get(gca,'Position') ;
     set(gca,'Position',[0.3 pos(2) 0.35 pos(4)]) ;
+else
+    annotation('textbox',[0.725 0.12 0.25 0.14],'String',{'Patches show OW theory constraints:','Brown=budget equations','Green=entrainment model'},'EdgeColor','k','backgroundcolor','w') ;
 end % if
 
 % Output structure for interactive use
