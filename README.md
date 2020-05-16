@@ -6,8 +6,8 @@ Polar Overturning Circulation model
 
 Polar Overturning Circulation model Matlab code for publication. 
 
-  * Run run_POC_model.mlx to run the suite of experiments and build figures.Under development...
-  * Run interactive_POC_model.mlapp app or install it via ConceptualPOCmodel.mlappinstall to use the interactive version.
+  * Run `run_POC_model.mlx` to run the suite of experiments and build figures.Under development...
+  * Run `interactive_POC_model.mlapp` app or install it via `ConceptualPOCmodel.mlappinstall` to use the interactive version.
   
  The Matlab code uses <a target="_blank" href="http://www.teos-10.org/software.htm#1">Gibbs-Seawater (GSW) Oceanographic Toolbox functions</a>.</small></p>
  
