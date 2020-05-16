@@ -11,7 +11,7 @@ Polar Overturning Circulation model Matlab code for publication.
   
  The Matlab code uses <a target="_blank" href="http://www.teos-10.org/software.htm#1">Gibbs-Seawater (GSW) Oceanographic Toolbox functions</a>.</small></p>
  
- Under development...
+ Under development...Paper in preparation...
 
 --------
 
