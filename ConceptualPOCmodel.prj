@@ -1,0 +1,111 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="1429655403" file="/Users/thaine1/Desktop/manuscripts/Haine/Polar overturning model/ConceptualPOCmodel.prj" location="/Users/thaine1/Desktop/manuscripts/Haine/Polar overturning model" name="ConceptualPOCmodel" target="target.mlapps" target-name="Package App">
+    <param.appname>ConceptualPOCmodel</param.appname>
+    <param.authnamewatermark>Thomas Haine</param.authnamewatermark>
+    <param.email>Thomas.Haine@jhu.edu</param.email>
+    <param.company>E&amp;PS, JHU</param.company>
+    <param.icon />
+    <param.icons />
+    <param.summary>Computes solutions to the Conceptual Polar Overturning Circulation model.</param.summary>
+    <param.description>See Haine (in prep.) for details.
+
+May 2020</param.description>
+    <param.screenshot>/private/var/folders/c8/5kjcb0cn395d83w8dfvszmw1qpykvh/T/tp84639a1f_ba27_4dd3_8449_f06a59a0a931.png</param.screenshot>
+    <param.version>0.12</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>/Users/thaine1/Desktop/manuscripts/Haine/Polar overturning model</param.output>
+    <param.guid>bac562a9-fcbd-448f-949a-9b7a42abccce</param.guid>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}/interactive_POC_model.mlapp</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}/compute_POC_solutions.mlx</file>
+      <file>${PROJECT_ROOT}/compute_POC_theory.mlx</file>
+      <file>${PROJECT_ROOT}/compute_max_PW_salinity.m</file>
+      <file>${PROJECT_ROOT}/define_POC_base_case.mlx</file>
+      <file>${PROJECT_ROOT}/define_POC_plot_options.mlx</file>
+      <file>${PROJECT_ROOT}/define_POC_static_parameters.mlx</file>
+      <file>${PROJECT_ROOT}/plot_POC_TS_diagram.m</file>
+      <file>${PROJECT_ROOT}/plot_POC_solution.mlx</file>
+      <file>${PROJECT_ROOT}/solve_POC_model.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_CT_freezing.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_CT_from_pt.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_CT_from_t.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_SA_from_SP.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_SA_from_rho.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_SSO.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_T0.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_alpha.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_beta.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_cp0.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_cp_ice.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_enthalpy_ice.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_f.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_grav.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_latentheat_melting.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_pt0_from_t.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_rho.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_rho_ice.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_sigma0.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_specvol.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_specvol_first_derivatives.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_t_freezing.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_uPS.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_z_from_p.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/library/gsw_SAAR.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/library/gsw_SA_from_SP_Baltic.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/library/gsw_enthalpy_SSO_0.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/library/gsw_entropy_part.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/library/gsw_entropy_part_zerop.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/library/gsw_gibbs_ice.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/library/gsw_gibbs_pt0_pt0.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/thermodynamics_from_t/gsw_chem_potential_water_t_exact.m</file>
+      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/thermodynamics_from_t/gsw_t_deriv_chem_potential_water_t_exact.m</file>
+      <file>/Users/thaine1/matlab/tools/miscellaneous/wysiwyg.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="/Users/thaine1/Desktop/manuscripts/Haine" name="Polar overturning model" optional="false">/Users/thaine1/Desktop/manuscripts/Haine/Polar overturning model</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/Applications/MATLAB_R2018b.app</root>
+      <toolboxes>
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>true</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.15.4</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>maci64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
