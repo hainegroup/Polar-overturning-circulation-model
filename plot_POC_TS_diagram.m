@@ -82,7 +82,7 @@ set(l,'location','eastoutside','interpreter','latex') ;
 set(gca,'Box','on') ;
 title([this_case.base_case.exp_str,' ',this_case.base_case.tit_str],'Interpreter','latex','FontSize',14) ;
 
-if(~this_case.plot_options.app_mode)
+if(~this_case.base_case.app_mode)
     pos = get(gca,'Position') ;
     set(gca,'Position',[0.3 pos(2) 0.35 pos(4)]) ;
 else
