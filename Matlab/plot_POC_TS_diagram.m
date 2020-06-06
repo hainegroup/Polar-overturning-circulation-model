@@ -4,18 +4,21 @@
 function  objects = plot_POC_TS_diagram(this_case)
 
 % TS diagram
-theta      = -2.5:0.05:5 ;
-salts      = 33  :0.02:37.0 ;
-dens_labs  = 18  :0.25:32 ;
-dens_labs2 = 18  :0.50:32 ;
-[Y,X]      = meshgrid(theta,salts) ;
-sigma0     = gsw_sigma0(X,Y) ;
-iceT       = gsw_CT_freezing(salts,0) ;
-% Cut out densities below the freezing point.
-for ss = 1:length(salts)
-    inds2            = find(Y(ss,:)<iceT(ss)) ;
-    sigma0(ss,inds2) = NaN(length(inds2),1) ;
-end % ss
+persistent theta salts sigma0 iceT X Y dens_labs dens_labs2
+if(isempty(theta))
+    theta      = -2.5:0.05:12 ;
+    salts      = 30  :0.02:40.0 ;
+    dens_labs  = 18  :0.25:32 ;
+    dens_labs2 = 18  :0.50:32 ;
+    [Y,X]      = meshgrid(theta,salts) ;
+    sigma0     = gsw_sigma0(X,Y) ;
+    iceT       = gsw_CT_freezing(salts,0) ;
+    % Cut out densities below the freezing point.
+    for ss = 1:length(salts)
+        inds2            = find(Y(ss,:)<iceT(ss)) ;
+        sigma0(ss,inds2) = NaN(length(inds2),1) ;
+    end % ss
+end % if
 
 % Plot TS diagram
 [cs,h] = contour(X,Y,sigma0,dens_labs,'k') ;
@@ -65,6 +68,8 @@ objects.p_OW  = scatter(this_case.sens.S_3can,this_case.sens.T_3can ,80,'o','fil
 
 xlabel('Salinity [g/kg]')
 ylabel('Temperature [^{\rm o}C]')
+set(gca,'XLim',this_case.base_case.app.S1_lims+[-1 1]) ;
+set(gca,'YLim',this_case.base_case.app.T1_lims+[-0.5 0.5]) ;
 grid on
 
 switch(this_case.plot_options.diag_level)
