@@ -3,6 +3,8 @@ Polar Overturning Circulation model
 [![Build Status](https://travis-ci.com/ThomasHaine/polar_overturning_circulation_model.svg?branch=master)](https://travis-ci.com/ThomasHaine/polar_overturning_circulation_model)
 [![codecov](https://codecov.io/gh/ThomasHaine/polar_overturning_circulation_model/branch/master/graph/badge.svg)](https://codecov.io/gh/ThomasHaine/polar_overturning_circulation_model)
 [![License:MIT](https://img.shields.io/badge/License-MIT-lightgray.svg?style=flt-square)](https://opensource.org/licenses/MIT)
+[![DOI](https://zenodo.org/badge/257373994.svg)](https://zenodo.org/badge/latestdoi/257373994)
+
 
 Polar Overturning Circulation (POC) model Matlab code and `sympy` theory for publication. 
 
