@@ -16,7 +16,7 @@ Polar Overturning Circulation (POC) model Matlab code and `sympy` theory for pub
   
  The Matlab code uses <a target="_blank" href="http://www.teos-10.org/software.htm#1">Gibbs-Seawater (GSW) Oceanographic Toolbox functions</a>.</small></p>
  
-A Paper entitled *A Conceptual Model of Polar Overturning Circulations* has been submitted to JGR Oceans. See the ESSOAr preprint [here](doi.org/10.1002/essoar.10503487.1).
+A Paper entitled *A Conceptual Model of Polar Overturning Circulations* has been submitted to JPO. See the ESSOAr preprint [here](doi.org/10.1002/essoar.10503487.1).
 
 
 --------
