@@ -10,12 +10,12 @@
 %   5               F_2/Q_2 inequalities
 %   6               u_1/u_i inequalities
 %   7               OW/AW density stability
-% twnh Sep, Nov '19, Jan, Mar, May '20
+% twnh Sep, Nov '19, Jan, Mar, May, Sep '20
 
 function [Phis,S_ss,progmat,...
     U_is,U_2s,U_3s,u_ss,T_3s,S_3s,rho_3s,rho_ss,T_fss,...
     Q_2_los,Q_2_his,F_2_los,F_2_his,u_1_los,u_1_his,u_i_los,u_i_his,...
-    S_s0,DPhis,Lfacs,mat1_cd] = solve_POC_model(dynamic_parameters,this_index,static_parameters,geophysical_parameters)
+    S_s0,DPhis,Lfacs,mat1_cd] = solve_POC_model(dynamic_parameters,this_index,static_parameters,geophysical_parameters,static_fns)
 
 %% Extract variables from arguments
 Q          = dynamic_parameters.Q(this_index) ;
@@ -40,21 +40,11 @@ L          = static_parameters.L ;
 DPhi_limit = static_parameters.DPhi_limit ;
 pressure   = geophysical_parameters.pressure ;
 
-%% Test!
-%DS2 = dynamic_parameters.DS2(this_index) ;
-%S_2   = compute_max_PW_salinity(T_1, S_1, pressure, L, c_p, c_i, T_i, S_i) + DS2 
-%T_f2  = gsw_CT_freezing(S_2,pressure)   % Freezing temperature of Polar    Water, degC
-%rho_2 = gsw_rho(S_2, T_f2, pressure) ;   % Density              of Polar    Water, kg/m^3
-%T_a   = phi*T_f2 + (1 - phi)*T_1 ;       % Temperature          of ambient  Water, degC
-%S_a   = phi*S_2  + (1 - phi)*S_1 ;       % Salinity             of ambient  Water, g/kg
-%rho_a = gsw_rho(S_a, T_a, pressure) ;    % Density              of ambient  Water, kg/m^3
-%% end test!
-
 
 %% Compute progressively
 Phis_vec = linspace(0,1,static_parameters.N_Phis_vec)' ;
 N_Phis   = static_parameters.N_Phis_vec ;
-S_s0     = gsw_SA_from_rho(rh1,Tf2,pressure) ;        % Not exactly the right freezing temperature, but ensures that S_s0 is a slight overestimate.
+S_s0     = static_fns.S_from_rho(rh1,Tf2,pressure) ;        % Not exactly the right freezing temperature, but ensures that S_s0 is a slight overestimate.
 S_ss_vec = linspace(S_s0,static_parameters.S_ssmax,static_parameters.N_S_ss_vec)' ;
 N_S_ss   = static_parameters.N_S_ss_vec ;
 
@@ -94,11 +84,11 @@ mat1_cd  = Q_2_los ;
 
 % Precompute as much as possible
 [S_ss, Phis] = ndgrid(S_ss_vec,Phis_vec) ;
-T_fss        = gsw_CT_freezing(S_ss,pressure) ;         % Freezing temperature of Shelf Water, oC.
-rho_ss       = gsw_rho(S_ss, T_fss,pressure) ;          % Density              of Shelf Water, kg/m^3
+T_fss        = static_fns.T_freezing(S_ss,pressure) ;   % Freezing temperature of Shelf Water, oC.
+rho_ss       = static_fns.rho(S_ss, T_fss,pressure) ;   % Density              of Shelf Water, kg/m^3
 T_3s         = T_fss - (T_fss - T_a).*Phis ;            % Temperature          of Overflow Water, degC
 S_3s         = S_ss  - (S_ss  - S_a).*Phis ;            % Salinity             of Overflow Water, g/kg
-rho_3s       = gsw_rho(S_3s, T_3s, pressure) ;          % Density              of Overflow Water, kg/m^3
+rho_3s       = static_fns.rho(S_3s, T_3s, pressure) ;   % Density              of Overflow Water, kg/m^3
 Lfacs        = L - c_p.*T_fss + c_i.*(T_fss - T_i) ;    % Effective latent heat at the Shelf Water conditions, J/kg
 
 % Loop over S_s and Phi
@@ -151,7 +141,7 @@ for ss = 1:N_S_ss
             
             if(progmat(ss,pp,1) == 1 && progmat(ss,pp,2) == 1 && progmat(ss,pp,3) == 1)
                 % Compute u_s
-                u_s = U_3*(1 - Phi) ;
+                u_s = (rho_3/rho_s)*U_3*(1 - Phi) ;
                 
                 % Check entrainment Phi. Compute difference and compare to threshold:
                 DPhi = Phi - (1 - (gamma*(abs(u_s)^(1/3))*(rho_s - rha)^(-2/3))) ;
@@ -259,19 +249,5 @@ for ss = 1:N_S_ss
         end % if
     end % ss
 end % pp
-
-end
-
-% Function to compute the maximum polar water salinity using OC3D formula.
-% twnh Aug '17, Jan '20
-
-function S_PW = compute_max_PW_salinity(T_1, S_1, pressure, L, c_p, c_i, T_i, S_i)
-
-T_f1  = gsw_CT_freezing(S_1    ,pressure) ;      % Use freezing temperature at temperature T_1.
-alpha = gsw_alpha(      S_1,T_1,pressure) ;
-beta  = gsw_beta(       S_1,T_1,pressure) ;
-L1    = L  + c_i*(T_f1 - T_i) ;
-L2    = L1 + c_p*(T_1 - T_f1) ;
-S_PW  = (beta*(S_1 - S_i)*S_1*L1 + alpha*(T_1 - T_f1)*S_i*L2)/(beta*(S_1 - S_i)*L1 + alpha*(T_1 - T_f1)*L2) ;
 
 end

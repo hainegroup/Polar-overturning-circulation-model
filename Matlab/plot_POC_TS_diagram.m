@@ -1,23 +1,24 @@
 % Make a plot of the TS diagram
-% twnh May '20
+% twnh May, Sep '20
 
 function  objects = plot_POC_TS_diagram(this_case)
 
 % TS diagram
 persistent theta salts sigma0 iceT X Y dens_labs dens_labs2
-if(isempty(theta))
+if(isempty(theta) || this_case.base_case.app.replot_TS_diagram)
     theta      = -2.5:0.05:12 ;
     salts      = 30  :0.02:40.0 ;
     dens_labs  = 18  :0.25:32 ;
     dens_labs2 = 18  :0.50:32 ;
     [Y,X]      = meshgrid(theta,salts) ;
-    sigma0     = gsw_sigma0(X,Y) ;
-    iceT       = gsw_CT_freezing(salts,0) ;
+    sigma0     = this_case.static_fns.rho(X,Y,0) - 1000 ;
+    iceT       = this_case.static_fns.T_freezing(salts,0) ;
     % Cut out densities below the freezing point.
     for ss = 1:length(salts)
         inds2            = find(Y(ss,:)<iceT(ss)) ;
         sigma0(ss,inds2) = NaN(length(inds2),1) ;
     end % ss
+    this_case.base_case.app.replot_TS_diagram = false ;         % This is necessary if the freezing temperature or the EOS changes in the app.
 end % if
 
 % Plot TS diagram
@@ -39,20 +40,24 @@ if(this_case.plot_options.diag_level > 0)
     end % if
 end % if
 
-if(isfield(this_case.theory.patch_data,'S1'))
-    objects.p1 = patch(this_case.theory.patch_data.S1,this_case.theory.patch_data.T1,this_case.plot_options.OW_col) ;
-    set(objects.p1,'edgecolor','none','FaceAlpha',this_case.plot_options.transp_factor) ;
-    uistack(objects.p1,'bottom') ;
-end % if
-if(isfield(this_case.theory.patch_data,'S2'))
-    objects.p2 = patch(this_case.theory.patch_data.S2,this_case.theory.patch_data.T2,this_case.plot_options.OW_col) ;
-    set(objects.p2,'edgecolor','none','FaceAlpha',this_case.plot_options.transp_factor) ;
-    uistack(objects.p2,'bottom') ;
-end % if
-if(isfield(this_case.theory.patch_data,'S3'))
-    objects.p3 = patch(this_case.theory.patch_data.S3,this_case.theory.patch_data.T3,this_case.plot_options.aW_col) ;
-    set(objects.p3,'edgecolor','none','FaceAlpha',this_case.plot_options.transp_factor) ;
-    uistack(objects.p3,'bottom') ;
+if(this_case.plot_options.diag_level > 0 || this_case.base_case.app_mode)
+    
+    if(isfield(this_case.theory.patch_data,'S1'))
+        objects.p1 = patch(this_case.theory.patch_data.S1,this_case.theory.patch_data.T1,this_case.plot_options.OW_col) ;
+        set(objects.p1,'edgecolor','none','FaceAlpha',this_case.plot_options.transp_factor) ;
+        uistack(objects.p1,'bottom') ;
+    end % if
+    if(isfield(this_case.theory.patch_data,'S2'))
+        objects.p2 = patch(this_case.theory.patch_data.S2,this_case.theory.patch_data.T2,this_case.plot_options.OW_col) ;
+        set(objects.p2,'edgecolor','none','FaceAlpha',this_case.plot_options.transp_factor) ;
+        uistack(objects.p2,'bottom') ;
+    end % if
+    if(isfield(this_case.theory.patch_data,'S3'))
+        objects.p3 = patch(this_case.theory.patch_data.S3,this_case.theory.patch_data.T3,this_case.plot_options.aW_col) ;
+        set(objects.p3,'edgecolor','none','FaceAlpha',this_case.plot_options.transp_factor) ;
+        uistack(objects.p3,'bottom') ;
+    end % if
+    
 end % if
 
 % Plot water masses
@@ -75,13 +80,13 @@ grid on
 switch(this_case.plot_options.diag_level)
     case 0      % Production
         l = legend([objects.p_AW,objects.p_PW,objects.p_OW,objects.p_SW,objects.p_aW],...
-        'AW','PW','OW','SW','aW') ;
+            'AW','PW','OW','SW','aW') ;
     case 1      % Partial diagnostics
         l = legend([objects.p_AW,objects.p_PW,objects.p_OW,objects.p_SW,objects.p_aW,objects.p_theory2,objects.p_theoryi],...
-        'AW','PW','OW','SW','aW',this_case.theory.U_2_max.legend,this_case.theory.U_i_max.legend) ;
+            'AW','PW','OW','SW','aW',this_case.theory.U_2_max.legend,this_case.theory.U_i_max.legend) ;
     case 2      % Full diagnostics
         l = legend([objects.p_AW,objects.p_PW,objects.p_OW,objects.p_SW,objects.p_aW,objects.p_theory,objects.p_theory2,objects.p_theory2b,objects.p_theoryi,objects.p_theoryib,objects.p_theory3b],...
-        'AW','PW','OW','SW','aW',this_case.theory.denom0.legend,this_case.theory.U_2_max.legend,this_case.theory.U_2_min.legend,this_case.theory.U_i_max.legend,this_case.theory.U_i_min.legend,this_case.theory.U_3_min.legend) ;
+            'AW','PW','OW','SW','aW',this_case.theory.denom0.legend,this_case.theory.U_2_max.legend,this_case.theory.U_2_min.legend,this_case.theory.U_i_max.legend,this_case.theory.U_i_min.legend,this_case.theory.U_3_min.legend) ;
 end % switch
 set(l,'location','eastoutside','interpreter','latex') ;
 set(gca,'Box','on') ;
