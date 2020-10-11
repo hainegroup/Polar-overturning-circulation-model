@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="3732755618" file="/Users/thaine1/Desktop/manuscripts/Haine/working version/Polar overturning model/ConceptualPOCmodel.prj" location="/Users/thaine1/Desktop/manuscripts/Haine/working version/Polar overturning model" name="ConceptualPOCmodel" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="4160370206" file="/Users/thaine1/Desktop/manuscripts/Haine/working version/Polar overturning model/ConceptualPOCmodel.prj" location="/Users/thaine1/Desktop/manuscripts/Haine/working version/Polar overturning model" name="ConceptualPOCmodel" target="target.mlapps" target-name="Package App">
     <param.appname>ConceptualPOCmodel</param.appname>
     <param.authnamewatermark>Thomas Haine</param.authnamewatermark>
     <param.email>Thomas.Haine@jhu.edu</param.email>
@@ -7,21 +7,21 @@
     <param.icon />
     <param.icons />
     <param.summary>Computes solutions to the Conceptual Polar Overturning Circulation model.</param.summary>
-    <param.description>See Haine &lt;a href="10.1002/essoar.10503487.1"&gt;preprint on ESSOAr&lt;/a&gt; for details.
+    <param.description>See Haine (in review.) for details.
 
-June 2020</param.description>
-    <param.screenshot>/private/var/folders/c8/5kjcb0cn395d83w8dfvszmw1qpykvh/T/tp2511de5c_24cd_4c89_aaa2_000ef6735ef5.png</param.screenshot>
-    <param.version>1.0</param.version>
+Oct 2020</param.description>
+    <param.screenshot>/private/var/folders/c8/5kjcb0cn395d83w8dfvszmw1qpykvh/T/tpdac7cc7c_ae57_4b0d_8d8e_fee31a6c5687.png</param.screenshot>
+    <param.version>2.0</param.version>
     <param.products.name />
     <param.products.id />
     <param.products.version />
     <param.platforms />
     <param.output>/Users/thaine1/Desktop/manuscripts/Haine/working version/Polar overturning model</param.output>
-    <param.guid>dc89203e-89c4-417e-9088-a2d014fa25a1</param.guid>
+    <param.guid>117d9fa1-3672-4281-b052-aa2cbf8004ff</param.guid>
     <unset>
+      <param.company />
       <param.icon />
       <param.icons />
-      <param.version />
       <param.products.name />
       <param.products.id />
       <param.products.version />
@@ -32,7 +32,6 @@ June 2020</param.description>
       <file>${PROJECT_ROOT}/interactive_POC_model.mlapp</file>
     </fileset.main>
     <fileset.depfun>
-      <file>${PROJECT_ROOT}/build_POC_model.mlx</file>
       <file>${PROJECT_ROOT}/compute_POC_solutions.mlx</file>
       <file>${PROJECT_ROOT}/compute_POC_theory.mlx</file>
       <file>${PROJECT_ROOT}/compute_max_PW_salinity.m</file>
@@ -61,7 +60,6 @@ June 2020</param.description>
       <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_pt0_from_t.m</file>
       <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_rho.m</file>
       <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_rho_ice.m</file>
-      <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_sigma0.m</file>
       <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_specvol.m</file>
       <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_specvol_first_derivatives.m</file>
       <file>/Users/thaine1/matlab/tools/gsw_matlab_v3_06_11/gsw_t_freezing.m</file>
@@ -104,7 +102,7 @@ June 2020</param.description>
       <vista>false</vista>
       <linux>false</linux>
       <solaris>false</solaris>
-      <osver>10.15.5</osver>
+      <osver>10.15.6</osver>
       <os32>false</os32>
       <os64>true</os64>
       <arch>maci64</arch>
