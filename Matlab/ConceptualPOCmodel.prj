@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="4160370206" file="/Users/thaine1/Desktop/manuscripts/Haine/working version/Polar overturning model/ConceptualPOCmodel.prj" location="/Users/thaine1/Desktop/manuscripts/Haine/working version/Polar overturning model" name="ConceptualPOCmodel" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="2428957056" file="/Users/thaine1/Desktop/manuscripts/Haine/resubmitted Dec20/Polar overturning model/ConceptualPOCmodel.prj" location="/Users/thaine1/Desktop/manuscripts/Haine/resubmitted Dec20/Polar overturning model" name="ConceptualPOCmodel" target="target.mlapps" target-name="Package App">
     <param.appname>ConceptualPOCmodel</param.appname>
     <param.authnamewatermark>Thomas Haine</param.authnamewatermark>
     <param.email>Thomas.Haine@jhu.edu</param.email>
@@ -7,18 +7,20 @@
     <param.icon />
     <param.icons />
     <param.summary>Computes solutions to the Conceptual Polar Overturning Circulation model.</param.summary>
-    <param.description>See Haine (in review.) for details.
+    <param.description>See Haine (in review) for details.
 
-Oct 2020</param.description>
-    <param.screenshot>/private/var/folders/c8/5kjcb0cn395d83w8dfvszmw1qpykvh/T/tpdac7cc7c_ae57_4b0d_8d8e_fee31a6c5687.png</param.screenshot>
-    <param.version>2.0</param.version>
+May 2020</param.description>
+    <param.screenshot>/private/var/folders/c8/5kjcb0cn395d83w8dfvszmw1qpykvh/T/tp62cbb620_1d5b_4a86_8edc_f80d355aa3ce.png</param.screenshot>
+    <param.version>3.0</param.version>
     <param.products.name />
     <param.products.id />
     <param.products.version />
     <param.platforms />
-    <param.output>/Users/thaine1/Desktop/manuscripts/Haine/working version/Polar overturning model</param.output>
-    <param.guid>117d9fa1-3672-4281-b052-aa2cbf8004ff</param.guid>
+    <param.output>/Users/thaine1/Desktop/manuscripts/Haine/resubmitted Dec20/Polar overturning model</param.output>
+    <param.guid>7df9280c-e8b4-4d7c-b2c5-a8840a2aa896</param.guid>
     <unset>
+      <param.authnamewatermark />
+      <param.email />
       <param.company />
       <param.icon />
       <param.icons />
@@ -79,7 +81,7 @@ Oct 2020</param.description>
     <fileset.resources />
     <fileset.package />
     <build-deliverables>
-      <file location="/Users/thaine1/Desktop/manuscripts/Haine/working version" name="Polar overturning model" optional="false">/Users/thaine1/Desktop/manuscripts/Haine/working version/Polar overturning model</file>
+      <file location="/Users/thaine1/Desktop/manuscripts/Haine/resubmitted Dec20" name="Polar overturning model" optional="false">/Users/thaine1/Desktop/manuscripts/Haine/resubmitted Dec20/Polar overturning model</file>
     </build-deliverables>
     <workflow />
     <matlab>
@@ -102,7 +104,7 @@ Oct 2020</param.description>
       <vista>false</vista>
       <linux>false</linux>
       <solaris>false</solaris>
-      <osver>10.15.6</osver>
+      <osver>10.16</osver>
       <os32>false</os32>
       <os64>true</os64>
       <arch>maci64</arch>
