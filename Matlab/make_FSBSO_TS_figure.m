@@ -11,7 +11,7 @@ fprintf(1,'\n\n make_FSBSO_TS_figure.m \n Script to plot figure of Fram Strait a
 base_FS = 10 ;
 
 % Read raw FS data
-filename = 'ARK-XVIII_1_phys_oce.tab' ;
+filename = '../data/processed/ARK-XVIII_1_phys_oce.tab' ;
 fprintf(1,' Reading Fram Strait section [%s]...',filename) ;
 [Station, DateTime, lats, lons, press, temps, salts] = read_Fram_Strait_section(filename) ;
 fprintf(1,'done.\n') ;
@@ -97,7 +97,7 @@ text(35.30,-0.5,'Overflow W.','Fontsize',base_FS+2,'rotation',80,'backgroundcolo
 % the data isn't very dense in depth. Struggled to find a better section at
 % NODC.
 % https://www.nodc.noaa.gov/OC5/SELECT/allcruises/GB013327.html
-files = {'ocldb1590767725.30864_CTD.nc'} ;
+files = {'../data/processed/ocldb1590767725.30864_CTD.nc'} ;
 
 for tt = 1:size(files,1)
    this_file = files{tt} ;
