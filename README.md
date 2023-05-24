@@ -14,6 +14,6 @@ Polar Overturning Circulation (POC) model Matlab code and `sympy` theory for pub
   * Run `POB_entrainment_parametrization.mlx` for a comparison with the Price & O'Neil Baringer (1994) entrainment model parameters.
   * Run `make_FSBSO_TS_figure.m` to make the figure of data at Fram Strait and the Barents Sea Opening.
   
- The Matlab code uses [Gibbs-Seawater (GSW) Oceanographic Toolbox functions](http://www.teos-10.org/software.htm#1). It was written in Matlab version 2018b. It has been tested in Matlab 2023b.
+ The Matlab code uses [Gibbs-Seawater (GSW) Oceanographic Toolbox functions](http://www.teos-10.org/software.htm#1). It was written in Matlab version 2018b. It has been tested in Matlab 2023a.
  
 A Paper entitled [*A Conceptual Model of Polar Overturning Circulations*](https://journals.ametsoc.org/view/journals/phoc/51/3/JPO-D-20-0139.1.xml) has been published by JPO.
