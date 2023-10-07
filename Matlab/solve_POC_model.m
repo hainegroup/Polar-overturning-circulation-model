@@ -167,11 +167,11 @@ for ss = 1:N_S_ss
                     if(~(F_2_lo > 0 && F_2_hi > 0) || (F_2_lo < F && F_2_hi < F))    % Consistent
                         progmat(ss,pp,5) = 1 ;
                         % Now find the consistent (F_2,Q_2) value with smaller Q_2 by testing F_2_lo.
-                        F_2_lo = min([F_2_lo         0]) ;
+                        F_2_lo = min([F_2_lo 0]) ;
                         F_2_lo = max([F_2_lo F]) ;
                         Q_2_lo = (F_2_lo - const1)/slope1 ;
                         % Now find the consistent (F_2,Q_2) value with larger Q_2 by testing F_2_hi.
-                        F_2_hi = min([F_2_hi         0]) ;
+                        F_2_hi = min([F_2_hi 0]) ;
                         F_2_hi = max([F_2_hi F]) ;
                         Q_2_hi = (F_2_hi - const1)/slope1 ;
                         
