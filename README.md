@@ -9,6 +9,7 @@ Polar Overturning Circulation model
 Polar Overturning Circulation (POC) model MATLAB code and `sympy` theory for H21, plus subsequent development. 
 
   * Run `run_POC_model.mlx` to run experiments and build figures.
+  * Run `run_glacial_POC_model.mlx` to run LGM experiments and build figures (under development).
   * Run `run_H21_POC_model.mlx` to run the suite of experiments and build figures from H21 paper.
   * Run `interactive_POC_model.mlapp` app.
   * Run `symbolic_matrix_inverse.ipynb` notebook for POC theory used in the H21 paper.
