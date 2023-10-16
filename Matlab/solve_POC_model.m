@@ -57,6 +57,16 @@ U_is     = Q_2_los ;
 U_2s     = Q_2_los ;
 U_3s     = Q_2_los ;
 u_ss     = Q_2_los ;
+Phis     = Q_2_los ;
+S_ss     = Q_2_los ;
+T_fss    = Q_2_los ;
+rho_ss   = Q_2_los ;
+T_3s     = Q_2_los ;
+S_3s     = Q_2_los ;
+rho_3s   = Q_2_los ;
+Lfacs    = Q_2_los ;
+S_s0     = Q_2_los ;
+
 % Condition number diagnostics for debug:
 mat1_cd  = Q_2_los ;
 
