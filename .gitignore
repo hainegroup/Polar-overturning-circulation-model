@@ -89,3 +89,8 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# TWNH
+*.xml
+mat_files/
+tmp/
