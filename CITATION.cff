@@ -1,0 +1,27 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Polar-overturning-circulation-model
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Thomas
+    family-names: Haine
+    email: Thomas.Haine@jhu.edu
+    name-particle: Thomas
+    affiliation: Johns Hopkins University
+    orcid: 'https://orcid.org/0000-0001-8231-2419'
+identifiers:
+  - type: doi
+    value: 10.1175/JPO-D-20-0139.1
+    description: Journal of Physical Oceanography article
+repository-code: >-
+  https://github.com/hainegroup/Polar-overturning-circulation-model
+url: 'https://github.com/hainegroup'
+abstract: Matlab code for Polar Overturning Circulation model
+keywords:
+  - ocean model
+license: MIT
