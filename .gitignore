@@ -97,3 +97,4 @@ tmp/
 *.mat
 Matlab/results/
 results/
+*.pdf
