@@ -96,5 +96,6 @@ mat_files/
 tmp/
 *.mat
 Matlab/results/
+Matlab/figures/
 results/
 *.pdf
