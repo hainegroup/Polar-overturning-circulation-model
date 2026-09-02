@@ -94,3 +94,6 @@ target/
 *.xml
 mat_files/
 tmp/
+*.mat
+Matlab/results/
+results/
